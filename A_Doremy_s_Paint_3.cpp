@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -40,16 +41,37 @@ ostream &operator<<(ostream &out, const vector<T> &v) {
 void Solve() {
   int n;
   cin >> n;
-  vector<int> a(n);
-  cin >> a;
-  sort(a.begin(), a.end());
 
-  int i = 0, j = n - 1;
-  while (i < n) {
-    if (a[i] == a[i + 1])
-      i++;
+  vector<int> a(n);
+  for (int &x : a)
+    cin >> x;
+
+  map<int, int> freq;
+  for (int x : a)
+    freq[x]++;
+
+  // More than 2 distinct values
+  if (freq.size() > 2) {
+    cout << "No\n";
+    return;
   }
-    
+
+  // Only one value
+  if (freq.size() == 1) {
+    cout << "Yes\n";
+    return;
+  }
+
+  // Exactly two values
+  auto it = freq.begin();
+  int c1 = it->second;
+  ++it;
+  int c2 = it->second;
+
+  if (abs(c1 - c2) <= 1)
+    cout << "Yes\n";
+  else
+    cout << "No\n";
 }
 
 int main() {
