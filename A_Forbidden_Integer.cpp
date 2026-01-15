@@ -39,7 +39,7 @@ ostream &operator<<(ostream &out, const vector<T> &v) {
   return out;
 }
 
-void solve() {
+void Solve() {
   int n, k, x;
   cin >> n >> k >> x;
 
